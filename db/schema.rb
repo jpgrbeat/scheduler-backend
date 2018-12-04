@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_02_171359) do
+ActiveRecord::Schema.define(version: 2018_12_04_155337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_frequencies", force: :cascade do |t|
+    t.boolean "repeat_daily"
+    t.boolean "repeat_weekly"
+    t.boolean "repeat_bi_weekly"
+    t.boolean "repeat_monthly"
+    t.integer "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_notifications", force: :cascade do |t|
+    t.boolean "email_notification"
+    t.boolean "chrome_notification"
+    t.integer "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.date "date"
+    t.string "time_start"
+    t.string "time_end"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
