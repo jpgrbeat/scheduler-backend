@@ -6,13 +6,13 @@ class ApplicationController < ActionController::API
   def authenticate
     token = request.headers['Authorization'].split(' ')[1]
     decoded_payload = decode_token(token)
-    @a_current_user = User.find(decoded_payload['user_id'])
+    @my_current_user = User.find(decoded_payload['user_id'])
   rescue JWT::VerificationError
     render json: { success: false }, status: 401
   end
 
-  def a_current_user
-    @a_current_user ||= authenticate
+  def my_current_user
+    @my_current_user ||= authenticate
   end
 
   def hmac_secret

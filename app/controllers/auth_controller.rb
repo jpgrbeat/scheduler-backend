@@ -10,7 +10,6 @@ class AuthController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       token = generate_token(user)
-      print(json: { token: token, user: user} , status: 200)
       render json: { token: token, user: user} , status: 200
     else
       render "Failed", status: 404
