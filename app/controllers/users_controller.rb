@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate, only: [:create]
   def show
     render json: my_current_user
   end
